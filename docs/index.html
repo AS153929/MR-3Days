@@ -146,6 +146,13 @@
 
     <!-- 正文内容 -->
     <main class="content">
+        <!-- 整合版章节预览（自动从仓库拉取 Markdown） -->
+        <section class="section" id="preview">
+            <div class="container">
+                <h2 class="section-title">章节预览</h2>
+                <div id="md-preview" class="chapter-content"></div>
+            </div>
+        </section>
         <article id="chapter-1" class="chapter">
             <div class="container">
                 <header class="chapter-header">
@@ -228,5 +235,26 @@
     <button class="back-to-top" id="backToTop" title="回到顶部">↑</button>
 
     <script src="script.js"></script>
+        <script>
+            // 使用 GitHub Raw 拉取整合版 Markdown，并渲染前若干段落作为预览
+            (async function(){
+                const url = 'https://raw.githubusercontent.com/AS153929/MR-3Days/main/output/Doc/3Days.md';
+                try {
+                    const res = await fetch(url);
+                    const text = await res.text();
+                    // 取前 1200 字符作为预览，保留段落结构
+                    const preview = text.replace(/\r/g, '').split('\n').slice(0, 80).join('\n');
+                    const html = preview
+                        .replace(/^###?\s+(.*)$/gm, '<h3>$1</h3>')
+                        .replace(/^#\s+(.*)$/gm, '<h2>$1</h2>')
+                        .replace(/\n\n/g, '</p><p>')
+                        .replace(/^/,'<p>') + '</p>';
+                    const el = document.getElementById('md-preview');
+                    if(el){ el.innerHTML = html; }
+                } catch(e){
+                    console.error('预览加载失败', e);
+                }
+            })();
+        </script>
 </body>
 </html>
