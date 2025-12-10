@@ -1,6 +1,65 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MR-3Days | 出版站点</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>MR-3Days</h1>
+    <p>任务仓库出版站点（GitHub Pages）</p>
+    <nav class="actions">
+      <a href="#about">关于</a>
+      <a href="#preview">预览</a>
+      <a href="#downloads">下载</a>
+      <a href="https://github.com/AS153929/MR-3Days" target="_blank">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about">
+      <h2>关于项目</h2>
+      <p>本站用于发布与预览仓库内容，便于交付与分享。启用 GitHub Pages 后，访问此页面即可在线阅读与下载。</p>
+    </section>
+
+    <section id="preview">
+      <h2>在线预览</h2>
+      <p>从仓库内的 Markdown 文档加载并渲染，适合快速浏览。</p>
+      <div class="preview-controls">
+        <label>
+          选择文档：
+          <select id="docSelect">
+            <option value="../output/Doc/the_last_lesson.md">the_last_lesson.md</option>
+          </select>
+        </label>
+        <button id="loadBtn">加载</button>
+      </div>
+      <article id="previewContainer" class="preview"></article>
+    </section>
+
+    <section id="downloads">
+      <h2>下载交付物</h2>
+      <ul>
+        <li><a href="../output/Doc/the_last_lesson.md" download>Markdown（the_last_lesson.md）</a></li>
+      </ul>
+      <p>如需添加 PDF/EPUB，请将文件放入仓库并在此处添加链接。</p>
+    </section>
+  </main>
+
+  <button id="backToTop" class="back-to-top">↑</button>
+
+  <footer>
+    <small>© MR-3Days · 由 GitHub Pages 提供</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>三日 | 3Days - 商业穿越小说</title>

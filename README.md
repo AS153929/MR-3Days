@@ -1,3 +1,13 @@
+## 发布与交付（GitHub Pages）
+- 打开仓库 `Settings → Pages`
+- 选择 `Branch: main`，`Folder: /docs`，保存
+- 等待约 1–2 分钟，访问仓库 Pages 域名
+
+### 站点入口与交付物
+- 站点入口：`docs/index.html`（Pages 生效后作为主页）
+- 在线预览：页面“在线预览”从仓库 Markdown 加载内容
+- 下载交付物：页面“下载交付物”提供 `output/Doc/the_last_lesson.md`
+
 # MR - Mission Repo: 3Days (三日)
 
 > E = MC² × AI
