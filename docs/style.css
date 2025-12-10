@@ -65,6 +65,14 @@ section p { color: var(--muted); }
 }
 .back-to-top:hover { border-color: var(--accent); color: var(--accent); }
 
+.back-to-toc {
+    position: fixed; right: 72px; bottom: 16px;
+    padding: 10px 14px; border-radius: 999px;
+    border: 1px solid var(--border); background: #0f1622; color: var(--fg);
+    cursor: pointer; display: none;
+}
+.back-to-toc:hover { border-color: var(--accent); color: var(--accent); }
+
 footer { text-align: center; padding: 24px; border-top: 1px solid var(--border); color: var(--muted); }
 /* ========================================
    三日 (3Days) - 小说阅读网页样式

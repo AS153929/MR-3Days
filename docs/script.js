@@ -32,10 +32,18 @@ document.getElementById('loadBtn').addEventListener('click', loadSelectedDoc);
 
 // Back to top
 const backToTop = document.getElementById('backToTop');
+const backToToc = document.getElementById('backToToc');
 window.addEventListener('scroll', () => {
   backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
+  backToToc.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// Back to TOC section
+backToToc.addEventListener('click', () => {
+  const toc = document.getElementById('toc');
+  if (toc) toc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 
 // Build anchors for chapters and populate TOC
 function buildChapterAnchorsAndTOC(container) {
