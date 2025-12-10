@@ -1,0 +1,42 @@
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+<button id="backToToc" class="back-to-toc" title="返回目录">目录</button>
+<script>
+  // Assign chapter anchors and enhance TOC after Pandoc renders
+  (function() {
+    function buildAnchors() {
+      var headings = document.querySelectorAll('h1, h2');
+      var chapterRegex = /^第([一二三四五六七八九十]+)章/;
+      var count = 0;
+      for (var i = 0; i < headings.length; i++) {
+        var h = headings[i];
+        var text = (h.textContent || '').trim();
+        if (chapterRegex.test(text)) {
+          count += 1;
+          h.id = 'chapter-' + count;
+        }
+      }
+    }
+
+    function setupButtons() {
+      var backToTop = document.getElementById('backToTop');
+      var backToToc = document.getElementById('backToToc');
+      function onScroll(){
+        var show = window.scrollY > 300;
+        backToTop.style.display = show ? 'block' : 'none';
+        backToToc.style.display = show ? 'block' : 'none';
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+      backToTop.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      backToToc.addEventListener('click', function(){
+        var toc = document.getElementById('TOC');
+        if (toc) toc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      buildAnchors();
+      setupButtons();
+    });
+  })();
+  </script>

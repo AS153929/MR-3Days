@@ -28,9 +28,48 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+<nav class="read-nav">
+  <a class="home-link" href="index.html">返回首页</a>
+  <span class="sep">|</span>
+  <span class="hint">下方为自动生成的章节目录（TOC）</span>
+</nav>
 <header id="title-block-header">
 <h1 class="title">三日 (3Days)</h1>
 </header>
+<nav id="TOC" role="doc-toc">
+<ul>
+<li><a href="#三日-3days" id="toc-三日-3days">三日 (3Days)</a></li>
+<li><a href="#第二章破局" id="toc-第二章破局">第二章：破局</a>
+<ul>
+<li><a href="#一" id="toc-一">一</a></li>
+<li><a href="#二" id="toc-二">二</a></li>
+<li><a href="#三" id="toc-三">三</a></li>
+<li><a href="#四" id="toc-四">四</a></li>
+</ul></li>
+<li><a href="#第三章重塑" id="toc-第三章重塑">第三章：重塑</a>
+<ul>
+<li><a href="#一-1" id="toc-一-1">一</a></li>
+<li><a href="#二-1" id="toc-二-1">二</a></li>
+<li><a href="#三-1" id="toc-三-1">三</a></li>
+<li><a href="#四-1" id="toc-四-1">四</a></li>
+</ul></li>
+<li><a href="#第四章博弈" id="toc-第四章博弈">第四章：博弈</a>
+<ul>
+<li><a href="#一-2" id="toc-一-2">一</a></li>
+<li><a href="#二-2" id="toc-二-2">二</a></li>
+<li><a href="#三-2" id="toc-三-2">三</a></li>
+<li><a href="#四-2" id="toc-四-2">四</a></li>
+</ul></li>
+<li><a href="#第五章回响" id="toc-第五章回响">第五章：回响</a>
+<ul>
+<li><a href="#一-3" id="toc-一-3">一</a></li>
+<li><a href="#二-3" id="toc-二-3">二</a></li>
+<li><a href="#三-3" id="toc-三-3">三</a></li>
+<li><a href="#四-3" id="toc-四-3">四</a></li>
+<li><a href="#尾声" id="toc-尾声">尾声</a></li>
+</ul></li>
+</ul>
+</nav>
 <h1 id="三日-3days">三日 (3Days)</h1>
 <blockquote>
 <p>一部探讨商业智慧与时代变迁的穿越小说 时间：1987年11月30日—12月2日 ·
@@ -905,5 +944,47 @@ Tex在中国需要的不是一个愿意和您一起走灰色地带的供应商�
 <p>而未来，还在继续书写。</p>
 <hr />
 <p><strong>（全文完）</strong></p>
+<button id="backToTop" class="back-to-top" title="返回顶部">↑</button>
+<button id="backToToc" class="back-to-toc" title="返回目录">目录</button>
+<script>
+  // Assign chapter anchors and enhance TOC after Pandoc renders
+  (function() {
+    function buildAnchors() {
+      var headings = document.querySelectorAll('h1, h2');
+      var chapterRegex = /^第([一二三四五六七八九十]+)章/;
+      var count = 0;
+      for (var i = 0; i < headings.length; i++) {
+        var h = headings[i];
+        var text = (h.textContent || '').trim();
+        if (chapterRegex.test(text)) {
+          count += 1;
+          h.id = 'chapter-' + count;
+        }
+      }
+    }
+
+    function setupButtons() {
+      var backToTop = document.getElementById('backToTop');
+      var backToToc = document.getElementById('backToToc');
+      function onScroll(){
+        var show = window.scrollY > 300;
+        backToTop.style.display = show ? 'block' : 'none';
+        backToToc.style.display = show ? 'block' : 'none';
+      }
+      window.addEventListener('scroll', onScroll);
+      onScroll();
+      backToTop.addEventListener('click', function(){ window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      backToToc.addEventListener('click', function(){
+        var toc = document.getElementById('TOC');
+        if (toc) toc.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      buildAnchors();
+      setupButtons();
+    });
+  })();
+  </script>
 </body>
 </html>
