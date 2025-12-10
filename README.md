@@ -8,6 +8,17 @@
 - 在线预览：页面“在线预览”从仓库 Markdown 加载内容
 - 下载交付物：页面“下载交付物”提供 `output/Doc/the_last_lesson.md`
 
+### 直接链接（启用 Pages 后）
+- 主页（默认）：`https://AS153929.github.io/MR-3Days/`
+- 在线阅读（Markdown）：`https://AS153929.github.io/MR-3Days/3Days.md`
+- 下载 EPUB：`https://AS153929.github.io/MR-3Days/3Days.epub`
+- 下载 PDF：`https://AS153929.github.io/MR-3Days/3Days.pdf`
+
+### 仓库内文件（相对路径）
+- `docs/index.html`：站点首页
+- `docs/3Days.md`：完整正文（五章合并，无引用/占位）
+- `docs/3Days.epub`、`docs/3Days.pdf`：导出格式文件
+
 # MR - Mission Repo: 3Days (三日)
 
 > E = MC² × AI
