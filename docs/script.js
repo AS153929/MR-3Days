@@ -22,6 +22,7 @@ async function loadSelectedDoc() {
     if (!res.ok) throw new Error('获取失败: ' + res.status);
     const text = await res.text();
     container.innerHTML = simpleMarkdownToHTML(text);
+    buildChapterAnchorsAndTOC(container);
   } catch (e) {
     container.textContent = '加载失败：' + e.message;
   }
@@ -35,6 +36,36 @@ window.addEventListener('scroll', () => {
   backToTop.style.display = window.scrollY > 300 ? 'block' : 'none';
 });
 backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+// Build anchors for chapters and populate TOC
+function buildChapterAnchorsAndTOC(container) {
+  const tocList = document.getElementById('tocList');
+  tocList.innerHTML = '';
+  const headings = Array.from(container.querySelectorAll('h1, h2'));
+  const chapterRegex = /^第([一二三四五六七八九十]+)章/;
+
+  let chapterCount = 0;
+  headings.forEach(h => {
+    const text = h.textContent.trim();
+    const match = text.match(chapterRegex);
+    if (match) {
+      chapterCount += 1;
+      const id = 'chapter-' + chapterCount;
+      h.id = id;
+      const li = document.createElement('li');
+      const a = document.createElement('a');
+      a.href = '#' + id;
+      a.textContent = text;
+      li.appendChild(a);
+      tocList.appendChild(li);
+    }
+  });
+}
+
+// Auto-load default doc on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadSelectedDoc();
+});
 // 简易交互脚本：导航开关、回到顶部
 (function(){
   const navToggle = document.getElementById('navToggle');
