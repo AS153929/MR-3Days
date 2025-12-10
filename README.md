@@ -115,4 +115,4 @@ MR/
 	- 语境持续维护（Context Gardening）
 	- 可交付可发布（Delivery-Ready）
 - 推荐落地：将对外交付与站点统一在 `docs/`；在 `MISSION/docs/` 建立事实索引与引用约束；把协作模板与指南沉淀到 `CONNECTION/Workbench/`。
-
+---
