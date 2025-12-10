@@ -56,6 +56,8 @@ section p { color: var(--muted); }
 .preview pre { background: #0b0e13; padding: 12px; border-radius: 8px; overflow: auto; }
 .preview code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
 .preview a { color: var(--accent); }
+.preview ul { padding-left: 1.2em; }
+.preview hr { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
 
 .back-to-top {
     position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom));

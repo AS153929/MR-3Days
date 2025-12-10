@@ -1,14 +1,36 @@
 function simpleMarkdownToHTML(md) {
-  // Very lightweight Markdown renderer for headings, bold, italics, code and links.
+  // Lightweight Markdown renderer: headings, emphasis, code, hr, lists, paragraphs.
+  const inline = (s) => s
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Headings
   let html = md
     .replace(/^###\s+(.*)$/gm, '<h3>$1</h3>')
     .replace(/^##\s+(.*)$/gm, '<h2>$1</h2>')
-    .replace(/^#\s+(.*)$/gm, '<h1>$1</h1>')
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\n```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-    .replace(/\n\n/g, '</p><p>');
+    .replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+
+  // Code fences
+  html = html.replace(/\n```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+
+  // Horizontal rules
+  html = html.replace(/^(?:\s*[-*_]{3,})\s*$/gm, '<hr/>');
+
+  // Unordered lists: blocks starting with '- '
+  html = html.replace(/^(?:- .+(?:\r?\n|$))+?/gm, (block) => {
+    const lines = block.trim().split(/\r?\n/).filter(l => l.trim().startsWith('- '));
+    const items = lines.map(l => l.replace(/^- +/, '')).map(inline).map(s => `<li>${s}</li>`).join('');
+    return `<ul>${items}</ul>`;
+  });
+
+  // Inline emphasis and code (after structural transforms)
+  html = inline(html);
+
+  // Paragraphs: split on double newlines where not already HTML blocks
+  html = html
+    .replace(/\n\n+/g, '</p><p>');
+
   return '<p>' + html + '</p>';
 }
 
